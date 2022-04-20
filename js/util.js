@@ -44,4 +44,11 @@ function getRandomElementsOfArray(array, count) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-export { getRandomInt, getRandomIntFloat, getRandomElementsOfArray };
+// Изменение одного пункта в Select при изменении другого (на то же значение)
+function onChangeOption(first, second) {
+  return () => {
+    second.value = first.options[first.selectedIndex].value;
+  }
+}
+
+export { getRandomInt, getRandomIntFloat, getRandomElementsOfArray, onChangeOption };
