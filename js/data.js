@@ -48,14 +48,14 @@ function getAd() {
   }
 }
 
-const ADS  = [];
+const ads  = [];
 
 for (let index = 0; index < COUNT_OF_ADS; index++) {
   let ad = getAd();
   let author = 'img/avatars/user' + (new Intl.NumberFormat('ru-RU', { minimumIntegerDigits: 2}).format(index + 1)) + '.png';
   ad.author = author;
   ad.offer.address = ad.location;
-  ADS.push(ad);
+  ads.push(ad);
 }
 
-export { ADS };
+export { ads };
