@@ -35,8 +35,8 @@ function getOffer() {
 
 function getLocation() {
   return {
-    x: getRandomIntFloat(LATITUDE_MIN, LATITUDE_MAX, FLOAT_COUNT),
-    y: getRandomIntFloat(LONGITUDE_MIN, LONGITUDE_MAX, FLOAT_COUNT),
+    lat: getRandomIntFloat(LATITUDE_MIN, LATITUDE_MAX, FLOAT_COUNT),
+    lng: getRandomIntFloat(LONGITUDE_MIN, LONGITUDE_MAX, FLOAT_COUNT),
   }
 }
 
