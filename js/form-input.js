@@ -24,3 +24,5 @@ const timeOut = form.querySelector('#timeout');
 
 timeIn.addEventListener('change', onChangeOption(timeIn, timeOut));
 timeOut.addEventListener('change', onChangeOption(timeOut, timeIn));
+
+export { form };
