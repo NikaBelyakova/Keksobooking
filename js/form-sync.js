@@ -45,4 +45,4 @@ roomNumber.addEventListener('change', function (evt) {
   })
 });
 
-export { form };
+export { form, selectPrice };

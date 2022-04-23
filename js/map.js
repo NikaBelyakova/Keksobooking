@@ -1,4 +1,4 @@
-import { form } from './form-input.js';
+import { form } from './form-sync.js';
 import { FLOAT_COUNT } from './data.js';
 import { ads } from './data.js';
 import { createAdCard } from './card.js';

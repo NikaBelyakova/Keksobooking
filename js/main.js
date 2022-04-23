@@ -1,4 +1,3 @@
-// import { createAdCard } from './card.js';
-// import { ads } from './data.js';
-import './form-input.js';
+import './form-sync.js';
 import './map.js';
+import './form-valid.js';
