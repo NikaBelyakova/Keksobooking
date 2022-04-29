@@ -58,4 +58,4 @@ for (let index = 0; index < COUNT_OF_ADS; index++) {
   ads.push(ad);
 }
 
-export { ads, FLOAT_COUNT };
+export { ads };

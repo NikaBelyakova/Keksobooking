@@ -1,3 +1,13 @@
+const ALERT_SHOW_TIME = 5000;
+
+const isEscEvent = (evt) => {
+  return evt.key === 'Escape' || evt.key === 'Esc';
+};
+
+const isEnterEvent = (evt) => {
+  return evt.key === 'Enter';
+};
+
 // Случайное число
 function getRandomInt(min, max) {
   if (min < 0 || max < 0) {
@@ -51,4 +61,60 @@ function onChangeOption(first, second) {
   }
 }
 
-export { getRandomInt, getRandomIntFloat, getRandomElementsOfArray, onChangeOption };
+// Показать сообщение об ошибке загрузки данных для карты
+const showALertGet = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'grey';
+
+  alertContainer.textContent = message;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+}
+
+// Показать сообщение об ошибке отправки формы
+function showAlertPost() {
+  const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
+  const errorMessageElement = errorMessageTemplate.cloneNode(true);
+  document.body.appendChild(errorMessageElement);
+
+  errorMessageElement.addEventListener('click', () => {
+    document.body.removeChild(errorMessageElement);
+  });
+  errorMessageElement.addEventListener('keydown', (evt) => {
+    if (isEscEvent(evt)) {
+      document.body.removeChild(errorMessageElement);
+    }
+  })
+}
+
+// Показать сообщение об успешной отправке формы
+function onSubmitSuccess(clearForm) {
+  const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
+  const successMessageElement = successMessageTemplate.cloneNode(true);
+  document.body.appendChild(successMessageElement);
+
+  successMessageElement.addEventListener('keydown', (evt) => {
+    if (isEscEvent(evt)) {
+      document.body.removeChild(successMessageElement);
+    }
+  });
+  successMessageElement.addEventListener('click', () => {
+    document.body.removeChild(successMessageElement);
+  })
+
+  clearForm();
+}
+
+export { onChangeOption, showAlertPost, showALertGet, onSubmitSuccess };

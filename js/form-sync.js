@@ -15,18 +15,25 @@ const MIN_PRICE = {
   'palace': 10000,
 };
 const form = document.querySelector('.ad-form');
+const avatar = form.querySelector('.ad-form-header__preview img');
+const inputTitle = form.querySelector('#title');
+const inputAddress = form.querySelector('#address');
 const selectType = form.querySelector('#type');
-const selectPrice = form.querySelector('#price');
+const typeOptions = selectType.querySelectorAll('option');
+const inputPrice = form.querySelector('#price');
 const timeIn = form.querySelector('#timein');
 const timeOut = form.querySelector('#timeout');
 const roomNumber = form.querySelector('#room_number');
 const selectCapacity = form.querySelector('#capacity');
 const capacityOptions = selectCapacity.querySelectorAll('option');
+const featuresList = form.querySelector('.features').querySelectorAll('input');
+const description = form.querySelector('#description');
+const photos = form.querySelector('.ad-form__photo');
 
 // Смена минимальной цены при выборе типа жилья
 selectType.addEventListener('change', function () {
-  selectPrice.setAttribute('min', MIN_PRICE[this.value]);
-  selectPrice.setAttribute('placeholder', MIN_PRICE[this.value]);
+  inputPrice.setAttribute('min', MIN_PRICE[this.value]);
+  inputPrice.setAttribute('placeholder', MIN_PRICE[this.value]);
 })
 
 // Смена времени заезда-выезда
@@ -45,4 +52,5 @@ roomNumber.addEventListener('change', function (evt) {
   })
 });
 
-export { form, selectPrice };
+
+export { form, inputPrice };

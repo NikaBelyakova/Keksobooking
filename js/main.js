@@ -1,3 +1,8 @@
-import './form-sync.js';
 import './map.js';
-import './form-valid.js';
+import './form.js';
+import { getData } from './api.js';
+import { renderAds } from './map.js'
+
+getData((data) => {
+  renderAds(data);
+});

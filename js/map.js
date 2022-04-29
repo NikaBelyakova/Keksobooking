@@ -1,11 +1,10 @@
-import { form } from './form-sync.js';
-import { FLOAT_COUNT } from './data.js';
-import { ads } from './data.js';
+import { form } from './form.js';
 import { createAdCard } from './card.js';
 
+const FLOAT_COUNT = 5;
 const TOKIO_CENTER = {
-  lat: 35.87792,
-  lng: 140.21851,
+  lat: 35.68236,
+  lng: 139.75270,
 };
 const mapSection = document.querySelector('.map');
 // const mapCanvas = mapSection.querySelector('#map-canvas');
@@ -44,7 +43,7 @@ const map = L.map('map-canvas')
   .on('load', () => {
     setTimeout(enableForm, 2000);
   })
-  .setView(TOKIO_CENTER, 9);
+  .setView(TOKIO_CENTER, 13);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -72,35 +71,39 @@ mainPinMarker.addTo(map);
 
 mainPinMarker.on('moveend', (evt) => {
   address.value = Object.values(evt.target.getLatLng())
-  .map((value) => value.toFixed(FLOAT_COUNT))
-  .join(', ');
+    .map((value) => value.toFixed(FLOAT_COUNT))
+    .join(', ');
 });
 
-ads.forEach((ad) => {
-  const {lat, lng} = ad.location;
+function renderAds(adsArray) {
+  adsArray.forEach((ad) => {
+    const { lat, lng } = ad.location;
 
-  const icon = L.icon({
-    iconUrl: '../img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
+    const icon = L.icon({
+      iconUrl: '../img/pin.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+    });
 
-  const marker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      icon,
-    },
-  );
-
-  marker
-    .addTo(map)
-    .bindPopup(
-      createAdCard(ad),
+    const marker = L.marker(
       {
-        keepInView: true,
-      }
+        lat,
+        lng,
+      },
+      {
+        icon,
+      },
     );
-});
+
+    marker
+      .addTo(map)
+      .bindPopup(
+        createAdCard(ad),
+        {
+          keepInView: true,
+        }
+      );
+  });
+}
+
+export { renderAds, TOKIO_CENTER, mainPinMarker };
