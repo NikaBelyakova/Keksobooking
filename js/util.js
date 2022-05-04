@@ -42,8 +42,8 @@ function getRandomIntFloat(min, max, n) {
 // Случайный набор элементов из массива, COUNT - количество необходимых элементов
 function getRandomElementsOfArray(array, count) {
   if (count > 1) {
-    let newArray = [];
-    for (let index = 0; index < count; index++) {
+    const newArray = [];
+    while (newArray.length !== count) {
       let element = array[Math.floor(Math.random() * array.length)];
       while (newArray.indexOf(element) === -1) {
         newArray.push(element);
@@ -117,4 +117,16 @@ function onSubmitSuccess(clearForm) {
   clearForm();
 }
 
-export { onChangeOption, showAlertPost, showALertGet, onSubmitSuccess };
+function getPriceLevel(price) {
+  let level;
+  if (price >= 50000) {
+    level = 'high';
+  } else if (price <= 10000) {
+    level = 'low';
+  } else {
+    level = 'middle';
+  }
+  return level;
+}
+
+export { getRandomElementsOfArray, onChangeOption, showAlertPost, showALertGet, onSubmitSuccess, getPriceLevel };

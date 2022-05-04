@@ -41,7 +41,6 @@ const description = form.querySelector('#description');
 const photos = form.querySelector('.ad-form__photo');
 const clearFormButton = form.querySelector('.ad-form__reset');
 
-
 function clearForm() {
   avatar.src = DEFAULT_AVATAR;
   inputTitle.value = '';
@@ -126,5 +125,6 @@ clearFormButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   clearForm();
 })
+
 
 export { form, inputPrice };

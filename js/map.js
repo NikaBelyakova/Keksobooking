@@ -1,4 +1,6 @@
+/* global L:readonly */
 import { form } from './form.js';
+import { isNeededRank } from './filter.js';
 import { createAdCard } from './card.js';
 
 const FLOAT_COUNT = 5;
@@ -6,6 +8,8 @@ const TOKIO_CENTER = {
   lat: 35.68236,
   lng: 139.75270,
 };
+const ADS_COUNT = 10;
+
 const mapSection = document.querySelector('.map');
 // const mapCanvas = mapSection.querySelector('#map-canvas');
 const mapFilters = mapSection.querySelector('.map__filters');
@@ -33,7 +37,7 @@ function enableForm() {
   const filters = mapFilters.children;
   for (const filter of filters) {
     filter.removeAttribute('disabled');
-  };
+  }
   address.value = Object.values(TOKIO_CENTER).join(', ');
 }
 
@@ -75,35 +79,44 @@ mainPinMarker.on('moveend', (evt) => {
     .join(', ');
 });
 
+let markers = [];
+
 function renderAds(adsArray) {
-  adsArray.forEach((ad) => {
-    const { lat, lng } = ad.location;
 
-    const icon = L.icon({
-      iconUrl: '../img/pin.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
-    });
+  adsArray
+    .slice()
+    .filter((ad) => isNeededRank(ad))
+    .slice(0, ADS_COUNT)
+    .forEach((ad) => {
+      const { lat, lng } = ad.location;
 
-    const marker = L.marker(
-      {
-        lat,
-        lng,
-      },
-      {
-        icon,
-      },
-    );
+      const icon = L.icon({
+        iconUrl: '../img/pin.svg',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+      });
 
-    marker
-      .addTo(map)
-      .bindPopup(
-        createAdCard(ad),
+      const marker = L.marker(
         {
-          keepInView: true,
-        }
+          lat,
+          lng,
+        },
+        {
+          icon,
+        },
       );
-  });
+
+      markers.push(marker);
+
+      marker
+        .addTo(map)
+        .bindPopup(
+          createAdCard(ad),
+          {
+            keepInView: true,
+          },
+        );
+    });
 }
 
-export { renderAds, TOKIO_CENTER, mainPinMarker };
+export { renderAds, TOKIO_CENTER, mainPinMarker, map, markers };
