@@ -39,7 +39,7 @@ function getFilterRank() {
   let rank = 0;
   let filterValues = getFilterValues();
   if (filterValues.type !== DEFAULT_FILTER) {
-    rank +=1;
+    rank += 1;
   }
   if (filterValues.price !== DEFAULT_FILTER) {
     rank += 1;
@@ -101,9 +101,8 @@ function onChangeFilter(cb) {
     markers.forEach((marker) => {
       marker.removeFrom(map);
     })
-
     cb();
   })
 }
 
-export { isNeededRank,  onChangeFilter};
+export { isNeededRank, onChangeFilter };
