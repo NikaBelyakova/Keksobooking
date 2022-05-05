@@ -44,9 +44,6 @@ function enableForm() {
 disableForm();
 
 const map = L.map('map-canvas')
-  .on('load', () => {
-    setTimeout(enableForm, 2000);
-  })
   .setView(TOKIO_CENTER, 13);
 
 L.tileLayer(
@@ -117,6 +114,7 @@ function renderAds(adsArray) {
           },
         );
     });
+  enableForm();
 }
 
 export { renderAds, TOKIO_CENTER, mainPinMarker, map, markers };

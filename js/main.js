@@ -5,6 +5,7 @@ import './form.js';
 import { getData } from './api.js';
 import { renderAds } from './map.js';
 import { onChangeFilter } from './filter.js';
+import './download-photo.js'
 
 const RERENDER_DELAY = 500;
 
