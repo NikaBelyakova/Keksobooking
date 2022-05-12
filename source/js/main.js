@@ -1,5 +1,4 @@
-/* global _:readonly */
-
+import { debounce } from 'lodash';
 import './map.js';
 import './form.js';
 import { getData } from './api.js';
